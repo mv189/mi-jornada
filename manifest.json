@@ -1,12 +1,19 @@
 
 {
+  "id": "./",
   "name": "Mi Jornada",
   "short_name": "Mi Jornada",
-  "description": "Registro de visitas, productos y actividades de merchandising.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f5f7f2",
   "theme_color": "#176b52",
-  "icons": []
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }
