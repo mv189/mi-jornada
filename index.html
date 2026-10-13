@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#176B52">
+  <title>Mi Jornada</title>
+  <link rel="stylesheet" href="styles.css">
+
+<link rel="manifest" href="./manifest.json">
+</head>
+<body>
+  <main class="app">
+
+    <!-- ENCABEZADO -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-icon">✓</div>
+        <div>
+          <h1>Mi Jornada</h1>
+          <p>Control de mercaderista</p>
+        </div>
+      </div>
+
+      <p class="welcome">¡Hola! 👋</p>
+      <h2>Organiza tu día,<br>paso a paso.</h2>
+      <p class="subtitle">Cada detalle cuenta en tu trabajo.</p>
+    </header>
+
+    <!-- PANTALLA DE INICIO -->
+    <section class="content" id="pantalla-inicio">
+      <div class="date-card">
+        <div>
+          <span class="muted">TU JORNADA</span>
+          <h3 id="fecha">Mi jornada de hoy</h3>
+        </div>
+        <span class="date-icon">☀</span>
+      </div>
+
+      <h2 class="section-title">¿Qué vamos a hacer?</h2>
+      <p class="section-description">
+        Accede rápidamente a tus herramientas.
+      </p>
+
+      <div class="menu-grid">
+        <button type="button" class="menu-card" data-page="punto">
+          <span class="menu-icon green">▣</span>
+          <strong>Punto de venta</strong>
+          <small>Registra tu visita</small>
+          <span class="arrow">↗</span>
+        </button>
+
+        <button type="button" class="menu-card" data-page="productos">
+          <span class="menu-icon orange">▤</span>
+          <strong>Productos</strong>
+          <small>Catálogo y reglas</small>
+          <span class="arrow">↗</span>
+        </button>
+
+        <button type="button" class="menu-card" data-page="actividades">
+          <span class="menu-icon blue">✓</span>
+          <strong>Actividades</strong>
+          <small>Registra tus labores</small>
+          <span class="arrow">↗</span>
+        </button>
+
+        <button type="button" class="menu-card" data-page="historial">
+          <span class="menu-icon purple">◷</span>
+          <strong>Historial</strong>
+          <small>Consulta tus jornadas</small>
+          <span class="arrow">↗</span>
+        </button>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-icon">✦</span>
+        <div>
+          <strong>Un día a la vez</strong>
+          <p>Organiza tu trabajo y lleva el control de cada visita.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANTALLA PUNTO DE VENTA -->
+    <section id="pantalla-punto" class="sub-screen" hidden>
+      <button type="button" class="back-button" data-page="inicio">
+        ← Volver al inicio
+      </button>
+
+      <h2 class="screen-title">Punto de venta</h2>
+      <p class="screen-description">
+        Registra tu visita y lleva el control de tu jornada.
+      </p>
+
+      <form id="form-visita" class="visit-form">
+        <label for="tienda">Nombre del punto de venta</label>
+        <input
+          id="tienda"
+          name="tienda"
+          type="text"
+          placeholder="Ej. Éxito, Olímpica, Ara..."
+          required
+        >
+
+        <label for="fecha-visita">Fecha de la visita</label>
+        <input
+          id="fecha-visita"
+          name="fecha"
+          type="date"
+          required
+        >
+
+        <div class="time-grid">
+          <div>
+            <label for="entrada">Hora de entrada</label>
+            <input id="entrada" name="entrada" type="time" required>
+          </div>
+
+          <div>
+            <label for="salida">Hora de salida</label>
+            <input id="salida" name="salida" type="time" required>
+          </div>
+        </div>
+
+        <div class="hours-card">
+          <span>Tiempo trabajado</span>
+          <strong id="total-horas">0 h 0 min</strong>
+        </div>
+
+        <label for="nota-visita">Observaciones (opcional)</label>
+        <textarea
+          id="nota-visita"
+          name="observaciones"
+          rows="3"
+          placeholder="Anota alguna novedad de la tienda..."
+        ></textarea>
+
+        <button type="submit" class="save-button">
+          Guardar visita
+        </button>
+
+        <p id="mensaje-visita" class="form-message" role="status"></p>
+      </form>
+    </section>
+
+    <!-- PANTALLA HISTORIAL -->
+    <section id="pantalla-historial" class="sub-screen" hidden>
+      <button type="button" class="back-button" data-page="inicio">
+        ← Volver al inicio
+      </button>
+
+      <h2 class="screen-title">Historial de visitas</h2>
+      <p class="screen-description">
+        Consulta los puntos de venta que has visitado.
+      </p>
+
+      <div id="lista-historial"></div>
+    </section>
+
+    <!-- PANTALLA PRODUCTOS -->
+    <section id="pantalla-productos" class="sub-screen" hidden>
+      <button class="back-button" data-page="inicio">
+        ← Volver al inicio
+      </button>
+
+      <h1 class="screen-title">Mis productos</h1>
+      <p class="screen-description">
+        Consulta y organiza los productos que manejas en tus visitas.
+      </p>
+
+      <form id="form-producto" class="visit-form">
+        <label for="nombre-producto">Nombre del producto</label>
+        <input
+          type="text"
+          id="nombre-producto"
+          placeholder="Ej. Saltinas Original"
+          required
+        >
+
+        <label for="marca-producto">Marca</label>
+        <input
+          type="text"
+          id="marca-producto"
+          placeholder="Ej. Noel"
+          required
+        >
+
+        <label for="presentacion-producto">Presentación</label>
+        <input
+          type="text"
+          id="presentacion-producto"
+          placeholder="Ej. Paquete de 3 unidades"
+        >
+
+        <label for="codigo-producto">Código de barras (opcional)</label>
+        <input
+          type="text"
+          id="codigo-producto"
+          placeholder="Escribe el código"
+        >
+
+        <button type="submit" class="save-button">
+          + Guardar producto
+        </button>
+
+        <p id="mensaje-producto" class="form-message"></p>
+      </form>
+
+      <h2 class="screen-title">Catálogo</h2>
+
+      <div class="import-card">
+        <h3>Importar catálogo</h3>
+        <p>
+          Carga tu archivo Excel para agregar los productos
+          y consultar sus categorías.
+        </p>
+
+        <label for="archivo-catalogo" class="save-button import-label">
+          Seleccionar archivo Excel
+        </label>
+
+        <input
+          type="file"
+          id="archivo-catalogo"
+          accept=".xlsx,.xls,.csv"
+          hidden
+        >
+
+        <p id="mensaje-importacion" class="form-message"></p>
+      </div>
+
+      <label for="filtro-categoria">Filtrar por categoría</label>
+      <select id="filtro-categoria" class="catalog-select">
+        <option value="">Todas las categorías</option>
+      </select>
+
+      <input
+        type="search"
+        id="buscar-producto"
+        placeholder="Buscar productos..."
+      >
+
+      <div id="lista-productos"></div>
+    </section>
+
+    <!-- PANTALLA ACTIVIDADES -->
+    <section id="pantalla-actividades" class="sub-screen" hidden>
+      <button class="back-button" data-page="inicio">
+        ← Volver al inicio
+      </button>
+
+      <h1 class="screen-title">Actividades</h1>
+      <p class="screen-description">
+        Registra las tareas que realizas en cada punto de venta.
+      </p>
+
+      <form id="form-actividad" class="visit-form">
+        <label for="tienda-actividad">Punto de venta</label>
+        <input
+          type="text"
+          id="tienda-actividad"
+          placeholder="Nombre de la tienda"
+          required
+        >
+
+        <label for="fecha-actividad">Fecha</label>
+        <input type="date" id="fecha-actividad" required>
+
+        <label>Actividades realizadas</label>
+
+        <div class="actividades-opciones">
+          <label>
+            <input type="checkbox" name="tipo-actividad" value="Organización de productos">
+            Organización de productos
+          </label>
+
+          <label>
+            <input type="checkbox" name="tipo-actividad" value="Revisión de precios">
+            Revisión de precios
+          </label>
+
+          <label>
+            <input type="checkbox" name="tipo-actividad" value="Verificación de inventario">
+            Verificación de inventario
+          </label>
+
+          <label>
+            <input type="checkbox" name="tipo-actividad" value="Revisión de planograma">
+            Revisión de planograma
+          </label>
+
+          <label>
+            <input type="checkbox" name="tipo-actividad" value="Reposición de productos">
+            Reposición de productos
+          </label>
+
+          <label>
+            <input type="checkbox" name="tipo-actividad" value="Otra actividad">
+            Otra actividad
+          </label>
+        </div>
+
+        <div class="actividad-personalizada">
+          <label for="nueva-actividad">Añadir otra actividad</label>
+          <div class="actividad-nueva-fila">
+            <input
+              type="text"
+              id="nueva-actividad"
+              placeholder="Ej. Organizar material promocional"
+            >
+            <button type="button" id="agregar-actividad" class="save-button">
+              + Añadir
+            </button>
+          </div>
+        </div>
+
+        <div id="actividades-personalizadas"></div>
+
+        <label for="nota-actividad">Observaciones</label>
+        <textarea
+          id="nota-actividad"
+          rows="4"
+          placeholder="Describe el trabajo realizado..."
+        ></textarea>
+
+        <button type="submit" class="save-button">
+          Guardar actividad
+        </button>
+
+        <p id="mensaje-actividad" class="form-message"></p>
+      </form>
+
+      <h2 class="screen-title">Actividades registradas</h2>
+      <div id="lista-actividades"></div>
+    </section>
+
+    <!-- NAVEGACIÓN INFERIOR -->
+    <nav class="bottom-nav">
+      <button type="button" class="nav-item active" data-page="inicio">
+        <span>⌂</span>Inicio
+      </button>
+
+      <button type="button" class="nav-item" data-page="productos">
+        <span>▤</span>Productos
+      </button>
+
+      <button type="button" class="nav-item" data-page="historial">
+        <span>◷</span>Historial
+      </button>
+
+      <button type="button" class="nav-item" data-page="ajustes">
+        <span>⚙</span>Ajustes
+      </button>
+    </nav>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
